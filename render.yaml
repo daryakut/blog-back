@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: blogapp-api
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URL
+        value: mongodb+srv://blog:pupsik@blog.gywnnnv.mongodb.net/blog
+      - key: JWT_SECRET
+        value: fhjkdsfk47gj5t8gjertg
+databases:
+  - name: my-mongodb
+    engine: mongodb
+    version: 4.4
+    plan: free
