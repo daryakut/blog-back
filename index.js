@@ -12,7 +12,23 @@ const fs = require("fs"); // Importing Node.js file system module
 require("dotenv").config(); // Connect dotenv to use environment variables
 
 const app = express(); // Creating an Express application
-app.use(cors({ credentials: true, origin: "http://localhost:3000" })); // Configuring CORS to allow requests from the frontend with credentials
+
+const allowedOrigins = ["https://blog-front-lgk0.onrender.com"];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.indexOf(origin) === -1) {
+        const msg =
+          "The CORS policy for this site does not allow access from the specified Origin.";
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
+    credentials: true,
+  })
+);
 app.use(express.json()); // Middleware to parse JSON bodies
 app.use(cookieParser()); // Middleware to parse cookies
 app.use("/uploads", express.static(__dirname + "/uploads")); // Serving static files from "uploads/" directory
