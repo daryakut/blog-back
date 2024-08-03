@@ -24,4 +24,4 @@ yarn-error.log*
 
 
 # ignore uploads
-/api/uploads/*
+/uploads/*
