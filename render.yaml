@@ -9,7 +9,7 @@ services:
       - key: NODE_ENV
         value: production
       - key: MONGODB_URL
-        value: mongodb+srv://blog:pupsik@blog.gywnnnv.mongodb.net/blog
+        value: mongodb+srv://blog:pupsik@blog.gywnnnv.mongodb.net/blog?retryWrites=true&w=majority
       - key: JWT_SECRET
         value: fhjkdsfk47gj5t8gjertg
 databases:
