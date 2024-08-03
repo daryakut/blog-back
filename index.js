@@ -18,10 +18,17 @@ app.use(cookieParser()); // Middleware to parse cookies
 app.use("/uploads", express.static(__dirname + "/uploads")); // Serving static files from "uploads/" directory
 
 // Connecting to MongoDB using Mongoose
-mongoose.connect(process.env.MONGODB_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+const uri = process.env.MONGODB_URL;
+mongoose
+  .connect(uri, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+    ssl: true,
+    tlsAllowInvalidCertificates: true,
+    tlsAllowInvalidHostnames: true,
+  })
+  .then(() => console.log("MongoDB connected"))
+  .catch((err) => console.error("Connection error:", err));
 
 // Handling connection events
 const db = mongoose.connection;
